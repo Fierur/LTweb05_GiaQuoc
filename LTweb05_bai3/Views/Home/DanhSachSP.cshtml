@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LTweb05_bai3.Models.SanPham>
+
+@{
+    ViewBag.Title = "DanhSachSP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh Sach San Pham</h2>
+<table class="table">
+    <tr>
+        <th>
+            Ma SP
+        </th>
+        <th>
+            Ten SP
+        </th>
+        <th>
+            Duong Dan
+        </th>
+        <th>
+            Gia
+        </th>
+        <th>
+            Mo Ta
+        </th>
+        <th>
+            Ma Loai
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSP)
+        </td>
+        <td>
+            <img src="~/Content/Images/@item.DuongDan" alt="@item.TenSP" style="width: 80px; height: 50px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MoTa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaLoai)
+        </td>
+    </tr>
+}
+
+</table>

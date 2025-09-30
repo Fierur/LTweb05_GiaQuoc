@@ -1,0 +1,35 @@
+﻿@model IEnumerable<LTweb05_bai3.Models.Loai>
+
+@{
+    ViewBag.Title = "DanhSachLoai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh Sach Loai</h2>
+
+<p>
+    @Html.ActionLink("Danh Sach San Pham", "DanhSachSP")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Ma Loai
+        </th>
+        <th>
+           Ten Loai
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaLoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenLoai)
+        </td>     
+    </tr>
+}
+
+</table>

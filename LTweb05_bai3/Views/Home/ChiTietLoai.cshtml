@@ -1,0 +1,87 @@
+﻿@using LTweb05_bai3.Models;
+@model LTweb05_bai3.ViewModel.SanPhamTheoLoai
+
+@{
+    ViewBag.Title = "ChiTietLoai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center;">Menu Loai San Pham</h2>
+
+<!--Menu doc-->
+<div style="display: flex; margin: 20px;">
+
+    <div style="width: 20%; padding: 10px; border-right: 2px solid #ddd;">
+        <h3><strong>Danh Mục</strong></h3>
+        <ul style="list-style-type: none; padding: 0;">
+            @{
+                KetNoiDuLieu db = new KetNoiDuLieu();
+                int index = 1;
+                foreach (var loai in db.dsLoaiSP)
+                {
+                    <li style="margin: 10px 0;">
+                        @if (Model.Loai != null && Model.Loai.MaLoai == loai.MaLoai)
+                        {
+                            @Html.ActionLink(loai.TenLoai, "ChiTietLoai", new { id = loai.MaLoai }, new { style = "font-size: 16px; text-decoration: none;" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink(loai.TenLoai, "ChiTietLoai", new { id = loai.MaLoai }, new { style = "font-size: 16px; text-decoration: none;" })
+                        }
+                    </li>
+                    index++;
+                }
+            }
+        </ul>
+    </div>
+
+    <!--Danh sach san pham-->
+    <div style="width: 80%; padding: 10px;">
+        @if (Model.Loai != null)
+        {
+            <h3 style="text-align: center;"><strong>San Pham Loai: @Model.Loai.TenLoai</strong></h3>
+        }
+        else
+        {
+            <h3 style="text-align: center;">Danh Sach San Pham</h3>
+        }
+
+        @if (Model.SanPham != null && Model.SanPham.Any())
+        {
+            <table class="table" style="width: 100%;">
+                <tr style="text-align: center;">
+                    <th>Ma SP</th>
+                    <th>Ten SP</th>
+                    <th>Hinh Anh</th>
+                    <th>Gia</th>
+                    <th>Mo Ta</th>
+                </tr>
+
+                @foreach (var item in Model.SanPham)
+                {
+                    <tr>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.MaSP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenSP)
+                        </td>
+                        <td style="text-align: center;">
+                            <img src="~/Content/images/@item.DuongDan" alt="@item.TenSP" style="width: 80px; height: 50px;" />
+                        </td>
+                        <td style="text-align: center;">
+                            @String.Format("{0:N0}", item.Gia) VNĐ
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.MoTa)
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p style="text-align: center;">Khong co san pham nao trong loai nay.</p>
+        }
+    </div>
+</div>

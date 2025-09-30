@@ -1,0 +1,63 @@
+﻿@model IEnumerable<LTweb05_bai3.Models.SanPham>
+
+@{
+    ViewBag.Title = "TimKiemTheoTen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center;">Tim Kiem San Pham Theo Ten</h2>
+
+<div style="text-align: center; margin: 20px;">
+    @using (Html.BeginForm("TimKiemTheoTen", "Home", FormMethod.Post))
+    {
+        <label>Nhap ten san pham:</label>
+        <input type="text" name="tensp" style="width: 300px; padding: 5px; margin: 0 10px;" />
+        <input type="submit" value="Tim kiem" class="btn btn-primary" />
+    }
+</div>
+
+@if (Model != null)
+{
+    <div style="text-align: center; margin: 20px;">
+        <h4>Ket qua tim kiem cho: "@ViewBag.TuKhoa"</h4>
+        <p>Tong so san pham tim thay: @ViewBag.SoLuong</p>
+    </div>
+
+    if (Model.Any())
+    {
+        <table class="table" style="margin: 0 auto; width: 90%;">
+            <tr style="text-align: center;">
+                <th>Ma SP</th>
+                <th>Ten SP</th>
+                <th>Hinh Anh</th>
+                <th>Gia</th>
+                <th>Mo Ta</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align: center;">
+                        @Html.DisplayFor(modelItem => item.MaSP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenSP)
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="~/Content/Images/@item.DuongDan" alt="@item.TenSP" style="width: 80px; height: 50px;" />
+                    </td>
+                    <td style="text-align: center;">
+                        @String.Format("{0:N}", item.Gia) VND
+                    </td>
+                    <td style="text-align: center;">
+                        @Html.DisplayFor(modelItem => item.MoTa)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p style="text-align: center;">Khong tim thay san pham nao phu hop.</p>
+    }
+}

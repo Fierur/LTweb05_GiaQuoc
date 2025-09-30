@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LTweb05_Bai1.Models.Bai1>
+
+@{
+    ViewBag.Title = "ShowEmp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowEmp</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Ma Nhan Vien
+        </th>
+        <th>
+            Ten
+        </th>
+        <th>
+            Gioi Tinh
+        </th>
+        <th>
+            Tinh
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioiTinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tinh)
+        </td>
+    </tr>
+}
+
+</table>
